@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #shuRuKuang1,
+  #shuRuKuang2,
+  #shuRuKuang3 {
+    border: 0;
+    border-bottom: 1px solid grey;
+    font-size: 15px;
+    flex: 1;
+
+  }
+
+  .bigbox {
+    margin: 250px auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .box {
+    margin: 0 50px;
+    flex: 1;
+  }
+
+  .line {
+    border: 0;
+  }
+</style>
+
+<body>
+  <div class="bigbox">
+    <div class="box">
+      <input class="line" placeholder="List1" id="shuRuKuang1">
+      <span id="anNiu1" onclick="change()">V</span>
+    </div>
+    <div class="box">
+      <input class="line" placeholder="List2" id="shuRuKuang2">
+      <span id="anNiu2" onclick="change()">V</span>
+    </div>
+    <div class="box">
+      <input class="line" placeholder="List3" id="shuRuKuang3">
+      <span id="anNiu3" onclick="change()">V</span>
+    </div>
+  </div>
+
+  <div style="text-align: center; font-size: 12px;">
+    <a href="./index.html">返回首页</a>
+  </div>
+
+  <!-- <p>第一个版本</p>
+  <p>第二个版本</p>
+  <button id="dz" onclick="dzs()">0</button> -->
+  <script>
+    let yaoshi = false;
+    let data = window.localStorage.getItem("shi");
+    if (data) {
+      document.getElementById("shuRuKuang").value = data;
+      change();
+    }
+    function change() {
+      let anNiu = document.getElementById("anNiu");
+      let shuRuKuang = document.getElementById("shuRuKuang");
+      if (yaoshi) {
+        yaoshi = false;
+        anNiu.innerText = "V";
+        shuRuKuang.value = "";
+        shuRuKuang.ariaReadOnly = false;
+        window.localStorage.removeItem("shi");
+      } else {
+        yaoshi = true;
+        anNiu.innerText = "X";
+        shuRuKuang.ariaReadOnly = true;
+        window.localStorage.setItem("shi", shuRuKuang.value);
+      }
+    }
+
+    // function dzs() {
+    //   let dianzanshu = parseInt(window.document.getElementById("dz").innerText);
+    //   dianzanshu++;
+    //   window.document.getElementById("dz").innerText = dianzanshu;
+    // }
+    // //服务器点赞记录伪代码
+    // function dzserval(uid, bv) {
+    //   let jilu = database.get("点赞记录", uid, bv);
+    //   if (jilu) {
+    //     let dianzanshu = database.jian("点赞数", bv, 1);
+    //     database.shanchu("点赞记录", uid, bv);
+    //     document.getElementById("dz").innerText = dianzaishu;
+    //   }
+    //   else {
+    //     let dianzanshu = database.jia("点赞数", bv, 1);
+    //     database.tianjia("点赞记录", uid, bv);
+    //     document.getElementById("dz").innerText = dianzaishu;
+    //   }
+    // }
+  </script>
+</body>
+
+</html>
